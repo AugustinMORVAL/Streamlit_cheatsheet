@@ -1,15 +1,15 @@
 import streamlit as st
 
-def full_display(label : str, code_snippet : str, explanation : str):
+def full_display(label : str, function, *args, explanation : str):
     st.subheader(label)
     col1, col2 = st.columns(2)
     with col1:
-        locals().update({'key': label})
-        exec(code_snippet, locals())
+        getattr(st.empty(), function)(*args)
     with col2:
         st.markdown(explanation)
         if st.toggle("Show code", key=label):
-            st.code(code_snippet, language='python')
+            st.code(f"st.{function}({', '.join(map(repr, args))})", language='python')
+    
 
 def display_code(label : str, code_snippet : str, explanation : str): 
     col1, col2 = st.columns(2)

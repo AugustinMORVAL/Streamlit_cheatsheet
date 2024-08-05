@@ -19,7 +19,7 @@ def display_element(label, function, *args, explanation):
 
 widgets = [
     ('Placeholder Text', 'text', "Hello", "Displays text that can be updated later."),
-    ('Placeholder DataFrame', 'dataframe', df, "Displays a DataFrame that can be updated later."),
+    ('Placeholder DataFrame', 'placeholder.dataframe', df, "Displays a DataFrame that can be updated later."),
     ('Placeholder Line Chart', 'line_chart', df, "Displays a line chart that can be updated later."),
     ('Placeholder Image', 'image', "img/logo-Cyy6uKYt.png", "Displays an image that can be updated later."),
     ('Placeholder Markdown', 'markdown', "# Hello, *World!*", "Displays Markdown text that can be updated later."),
