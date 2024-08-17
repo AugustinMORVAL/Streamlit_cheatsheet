@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+from utils.tutorial_display import full_display
 
 data = {
     'Column1': [1, 2, 3, 4, 5],
@@ -7,24 +8,51 @@ data = {
 }
 df = pd.DataFrame(data)
 
-def display_element(label, function, *args, explanation):
-    st.subheader(label)
-    col1, col2 = st.columns(2)
-    with col1:
-        getattr(st.empty(), function)(*args)
-    with col2:
-        st.markdown(explanation)
-        if st.toggle("Show code", key=label):
-            st.code(f"placeholder.{function}({', '.join(map(repr, args))})", language='python')
+path_to_logo = "img/logo-Cyy6uKYt.png"
 
-widgets = [
-    ('Placeholder Text', 'text', "Hello", "Displays text that can be updated later."),
-    ('Placeholder DataFrame', 'placeholder.dataframe', df, "Displays a DataFrame that can be updated later."),
-    ('Placeholder Line Chart', 'line_chart', df, "Displays a line chart that can be updated later."),
-    ('Placeholder Image', 'image', "img/logo-Cyy6uKYt.png", "Displays an image that can be updated later."),
-    ('Placeholder Markdown', 'markdown', "# Hello, *World!*", "Displays Markdown text that can be updated later."),
-    ('Placeholder Write', 'write', df, "Displays any type of data that can be updated later."),
+placeholder_elements = [
+    {
+       "label": "Placeholder Text",
+       "code_snippet": "st.empty().text('Hello, World!')",
+       "explanation": "Displays text that can be updated later.",
+       "alt": "placeholder.text('Hello, World!')",
+    },
+    {
+       "label": "Placeholder DataFrame",
+       "code_snippet": "st.empty().dataframe(data)",
+       "explanation": "Displays a DataFrame that can be updated later.",
+       "data": df,
+       "alt": "placeholder.dataframe(df)"
+    },
+    {
+       "label": "Placeholder Line Chart",
+       "code_snippet": "st.empty().line_chart(data)",
+       "explanation": "Displays a line chart that can be updated later.",
+       "data": df,
+       "alt": "placeholder.linechart(df)"
+    },
+    {
+       "label": "Placeholder Image",
+       "code_snippet": "st.empty().image(data)",
+       "explanation": "Displays an image that can be updated later.",
+       "data": path_to_logo,
+       "alt": "placeholder.image(path_to_logo)"
+    },
+    {
+       "label": "Placeholder Markdown",
+       "code_snippet": "st.empty().markdown('# Hello, *World!*')",
+       "explanation": "Displays Markdown text that can be updated later.",
+       "alt": "placeholder.markdown('# Hello, *World!*')",
+    },
+    {
+       "label": "Placeholder Write",
+       "code_snippet": "st.empty().write(data)",
+       "explanation": "Displays any type of data that can be updated later.",
+       "data": df,
+       "alt": "placeholder.write(df)"
+    },
 ]
+
 
 def placeholder_page():
     st.title("Streamlit Placeholder, Help, and Options Widgets")
@@ -32,8 +60,5 @@ def placeholder_page():
     st.title("Placeholder")
 
     st.code(f"placeholder = st.empty()", language='python')
-    for i, (label, function, *args, explanation) in enumerate(widgets):
-        display_element(f"{i+1}. {label}", function, *args, explanation=explanation)
-
-    st.title("Help")
-    display_element("Help Button", 'help', st.write, explanation="Displays a help button that shows a tooltip with the documentation for the specified function.")
+    placeholder = st.empty()
+    full_display(placeholder_elements)
