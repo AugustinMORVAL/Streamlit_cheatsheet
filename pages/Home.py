@@ -1,5 +1,5 @@
 import streamlit as st
-from utils.pages_registry import pages
+from pages_registry import pages
 
 def main_page():
     st.title("Welcome to Streamlit Cheatsheet")

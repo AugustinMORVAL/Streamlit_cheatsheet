@@ -1,0 +1,90 @@
+- label: Introduction to Session State
+  code_snippet: |
+    if 'key' not in st.session_state:
+        st.session_state.key = 'value'
+  explanation: |
+    Session state allows you to share variables between reruns, for each user session.
+    Use it to store and persist data across reruns.
+  display_only: true
+
+- label: Accessing Session State
+  code_snippet: |
+    # Initialize session state
+    if 'key' not in st.session_state:
+        st.session_state.key = 'value'
+    # Read from session state
+    value = st.session_state.key
+    # Or
+    value = st.session_state['key']
+    
+    # Write to session state
+    st.session_state.key = 10
+    # Or
+    st.session_state['key'] = 10
+  explanation: |
+    You can access session state using dot notation or dictionary-style notation.
+    Both methods work for reading and writing values.
+  display_only: true
+
+- label: Initializing Session State
+  code_snippet: |
+    if 'counter' not in st.session_state:
+        st.session_state.counter = 0
+  explanation: |
+    It's a good practice to check if a key exists in the session state before using it.
+    This prevents errors and allows you to set default values.
+  display_only: true
+
+- label: Using Session State with Widgets
+  code_snippet: |
+    # Initialize session state
+    if 'count' not in st.session_state:
+        st.session_state.count = 0
+
+    def increment():
+        st.session_state.count += 1
+
+    st.button('Increment', on_click=increment, key="increment")
+    st.write(f"Count: {st.session_state.count}")
+  explanation: |
+    You can use session state with widget callbacks to create interactive elements
+    that persist across reruns.
+
+- label: Clearing Session State
+  code_snippet: |
+    if st.button('Clear All'):
+        for key in list(st.session_state.keys()):
+            del st.session_state[key]
+  explanation: |
+    You can clear the entire session state or remove specific keys as needed.
+    This is useful for resetting your app's state.
+
+- label: Using Session State for Forms
+  code_snippet: |
+    with st.form("my_form"):
+        st.text_input("Name", key="name")
+        st.number_input("Age", key="age")
+        submitted = st.form_submit_button("Submit")
+
+    if submitted:
+        st.write(f"Hello {st.session_state.name}, you are {st.session_state.age} years old!")
+  explanation: |
+    Session state is particularly useful when working with forms in Streamlit.
+    Form inputs are automatically added to the session state using their key.
+
+- label: Best Practices
+  code_snippet: |
+    # Use descriptive keys
+    st.session_state.user_preferences = {...}
+    
+    # Initialize all state variables at the start
+    if 'initialized' not in st.session_state:
+        st.session_state.initialized = True
+        st.session_state.count = 0
+        st.session_state.user = None
+  explanation: |
+    - Use descriptive keys for better code readability.
+    - Initialize all state variables at the start of your app.
+    - Use session state judiciously to avoid cluttering.
+    - Remember that session state is per-user, not global across all users.
+  display_only: true

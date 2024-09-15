@@ -1,5 +1,5 @@
 import streamlit as st
-from utils.pages_registry import get_pages
+from pages_registry import get_pages
 
 st.set_page_config(
     page_title="Streamlit Cheatsheet",
