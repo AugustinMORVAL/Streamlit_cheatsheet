@@ -1,0 +1,52 @@
+- label: User Greeting
+  code_snippet: |
+    with st.chat_message("user"):
+        st.write("Hello 👋")
+  explanation: Displays a greeting message from the user in a chat message container.
+  category: Chat Message
+
+- label: Assistant Greeting
+  code_snippet: |
+    with st.chat_message("assistant"):
+        st.write("Hello! How can I assist you today?")
+  explanation: Displays a greeting message from the assistant in a chat message container.
+  category: Chat Message
+
+- label: Chat Input
+  code_snippet: |
+    prompt = st.chat_input("Say something")
+  explanation: Creates an input field for the user to type messages.
+  category: Input
+
+- label: Chatbot Response
+  code_snippet: |
+    if prompt := st.chat_input("What is up?"):
+        with st.chat_message("assistant"):
+            message_placeholder = st.empty()
+            full_response = "Hello! I'm a simple chatbot. You said: " + prompt
+            message_placeholder.markdown(full_response)
+  explanation: Demonstrates how the chatbot can respond to user input.
+  category: Interaction
+
+- label: User Response
+  code_snippet: |
+    if prompt := st.chat_input("What is up?", key="user_input"):
+        with st.chat_message("user):
+            st.write(f"User: {prompt}")
+  explanation: Shows how to display the user's message in the chat interface.
+  category: Interaction
+
+
+  code_snippet: |
+    for message in st.session_state.messages:
+        with st.chat_message(message["role"]):
+            st.markdown(message["content"])
+  explanation: Displays the chat history stored in session state.
+  category: History
+
+- label: Clear Chat History
+  code_snippet: |
+    if st.button("Clear Chat History"):
+        st.session_state.messages = []
+  explanation: Adds a button to clear the chat history stored in session state.
+  category: Interaction

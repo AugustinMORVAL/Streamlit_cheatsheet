@@ -1,4 +1,5 @@
-import streamlit as st  
+import streamlit as st
+from utils.pages_registry import pages
 
 def main_page():
     st.title("Welcome to Streamlit Cheatsheet")
@@ -16,33 +17,20 @@ def main_page():
 
     st.write("Explore a variety of tutorials to enhance your Streamlit skills.")
 
-    st.markdown("""
-    ### What you can find here:
-    """)
+    st.markdown("### What you can find here:")
 
-    # Using columns to create a more visually appealing layout
     col1, col2 = st.columns(2)
 
-    with col1:
-        st.subheader("Buttons")
-        st.markdown("Learn how to use buttons in Streamlit.")
-        if st.button("Go to Buttons Tutorial"):
-            st.write("Redirecting to Buttons Tutorial...")
-
-    with col2:
-        st.subheader("Page 3")
-        st.write("More tutorials coming soon!")
-        if st.button("Coming Soon"):
-            st.write("Stay tuned for more tutorials!")
+    for i, (page_name, page_function) in enumerate(pages.items()):
+        if page_name != "Home":
+            with col1 if i % 2 == 0 else col2:
+                st.subheader(page_name)
+                st.write(f"Learn about {page_name.lower()} in Streamlit.")
+                if st.button(f"Go to {page_name} Tutorial"):
+                    st.switch_page(f"pages/{i:02d}_{page_name.replace(' ', '_')}.py")
 
     # visual separation
-    st.markdown("""
-    ---
-    """)
+    st.markdown("---")
 
-    # Footer
-    st.markdown("""
-    <div style="text-align: center;">
-    © 2024 Morval Tech. All rights reserved.
-    </div>
-    """, unsafe_allow_html=True)
+if __name__ == "__main__":
+    main_page()

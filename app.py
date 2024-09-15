@@ -1,32 +1,27 @@
 import streamlit as st
-from resources.home import main_page
-from resources.install import installation_page
-from resources.widget import widget_page
-from resources.display import display_page
-from resources.placeholder import placeholder_page
-from resources.chat_app import chatting_app
+from utils.pages_registry import get_pages
 
-pages = {
-    "Home": main_page,
-    "Installation": installation_page,
-    "Display": display_page,
-    "Widgets": widget_page,
-    "Placeholder": placeholder_page,
-    "Build a ChatBot": chatting_app,
-}
+st.set_page_config(
+    page_title="Streamlit Cheatsheet",
+    page_icon="📚",
+)
 
-# Set "Home" as the default page
+st.sidebar.image("assets/images/streamlit-logo-primary-colormark-darktext.png", use_column_width=True)
+
 if 'page' not in st.session_state:
-    st.session_state.page = "Home"
+    st.session_state['page'] = 'Home'
 
-st.logo("img/logo-Cyy6uKYt.png")
-st.image("img/streamlit-logo-primary-colormark-darktext.png", use_column_width=True)
+pages = get_pages()
 
-st.sidebar.title("Navigation Menu")
-for page_title, page_func in pages.items():
-    if st.sidebar.button(f"{page_title}"):
-        st.session_state.page = page_title
+page = st.sidebar.selectbox('Go to', list(pages.keys()))
 
-# Display the selected page
-page_func = pages[st.session_state.page]
-page_func()
+
+st.session_state['page'] = page
+pages[st.session_state['page']]()
+
+# Footer
+st.markdown("""
+<div style="text-align: center;">
+© 2024 Morval Tech. All rights reserved.
+</div>
+""", unsafe_allow_html=True)

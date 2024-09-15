@@ -1,0 +1,6 @@
+streamlit
+pandas
+pyyaml
+altair
+matplotlib
+numpy

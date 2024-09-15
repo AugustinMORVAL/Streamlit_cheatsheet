@@ -1,0 +1,50 @@
+- label: Placeholder Text
+  code_snippet: st.empty().text('Hello, World!')
+  explanation: Displays text that can be updated later.
+  alt: placeholder.text('Hello, World!')
+  category: Placeholder
+
+- label: Placeholder DataFrame
+  code_snippet: st.empty().dataframe(data)
+  explanation: Displays a DataFrame that can be updated later.
+  data: df
+  alt: placeholder.dataframe(df)
+  category: Placeholder
+
+- label: Placeholder Line Chart
+  code_snippet: st.empty().line_chart(data)
+  explanation: Displays a line chart that can be updated later.
+  data: df
+  alt: placeholder.linechart(df)
+  category: Placeholder
+
+- label: Placeholder Image
+  code_snippet: st.empty().image(data)
+  explanation: Displays an image that can be updated later.
+  data: path_to_logo
+  alt: placeholder.image(path_to_logo)
+  category: Placeholder
+
+- label: Placeholder Markdown
+  code_snippet: st.empty().markdown('# Hello, *World!*')
+  explanation: Displays Markdown text that can be updated later.
+  alt: placeholder.markdown('# Hello, *World!*')
+  category: Placeholder
+
+- label: Placeholder Write
+  code_snippet: st.empty().write(data)
+  explanation: Displays any type of data that can be updated later.
+  data: df
+  alt: placeholder.write(df)
+  category: Placeholder
+
+- label: Exception
+  code_snippet: st.exception(Exception("This is an exception"))
+  explanation: Displays an exception.
+  category: Help
+
+- label: Help
+  code_snippet: st.help(pd.DataFrame)
+  explanation: Displays the docstring for the specified object.
+  category: Help
+
