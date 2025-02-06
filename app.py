@@ -6,17 +6,16 @@ st.set_page_config(
     page_icon="📚",
 )
 
-st.sidebar.image("assets/images/streamlit-logo-primary-colormark-darktext.png", use_column_width=True)
-
 if 'page' not in st.session_state:
     st.session_state['page'] = 'Home'
 
 pages = get_pages()
 
-page = st.sidebar.selectbox('Go to', list(pages.keys()))
+# Remplacer le selectbox par des boutons
+for page_name in pages.keys():
+    if st.sidebar.button(page_name):
+        st.session_state['page'] = page_name
 
-
-st.session_state['page'] = page
 pages[st.session_state['page']]()
 
 # Footer

@@ -1,5 +1,5 @@
 import streamlit as st
-from pages_registry import pages
+from pages_registry import get_pages
 
 def main_page():
     st.title("Welcome to Streamlit Cheatsheet")
@@ -21,13 +21,14 @@ def main_page():
 
     col1, col2 = st.columns(2)
 
+    pages = get_pages()
     for i, (page_name, page_function) in enumerate(pages.items()):
         if page_name != "Home":
             with col1 if i % 2 == 0 else col2:
                 st.subheader(page_name)
                 st.write(f"Learn about {page_name.lower()} in Streamlit.")
                 if st.button(f"Go to {page_name} Tutorial"):
-                    st.switch_page(f"pages/{i:02d}_{page_name.replace(' ', '_')}.py")
+                    st.switch_page(f"lessons/{page_name.replace(' ', '_')}.py")
 
     # visual separation
     st.markdown("---")

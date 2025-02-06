@@ -17,7 +17,7 @@
 
 - label: Page Link
   code_snippet: st.page_link("Display.py", label="Go to Display Page")
-  explanation: A link to another page in your Streamlit app. The file must be in the 'pages/' directory.
+  explanation: A link to another page in your Streamlit app. The file must be in the 'lessons/' directory.
 
 - label: Data Editor
   code_snippet: st.data_editor(data)

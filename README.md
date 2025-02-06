@@ -42,7 +42,7 @@ This approach provides an immersive learning experience, making it easier to gra
 The project is organized as follows:
 
 - `app.py`: Main application file.
-- `pages/`: Individual pages for each section of the cheatsheet.
+- `lessons/`: Individual pages for each section of the cheatsheet.
 - `data/`: YAML files containing tutorial content.
 - `utils/`: Utility functions for displaying tutorials.
 - `assets/`: Images and other static assets.
