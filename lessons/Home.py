@@ -27,7 +27,7 @@ def main_page():
             with col1 if i % 2 == 0 else col2:
                 st.subheader(page_name)
                 st.write(f"Learn about {page_name.lower()} in Streamlit.")
-                if st.button(f"Go to {page_name} Tutorial"):
+                if st.button(f"Go to {page_name} Tutorial", disabled=True):
                     st.switch_page(f"lessons/{page_name.replace(' ', '_')}.py")
 
     # visual separation
