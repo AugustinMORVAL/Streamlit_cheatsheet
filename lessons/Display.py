@@ -3,100 +3,119 @@ import pandas as pd
 import numpy as np
 import altair as alt
 import matplotlib.pyplot as plt
+import plotly.express as px
 import random
 import yaml
 from utils.tutorial_display import full_display
+import os
 
-df = pd.DataFrame(
-   np.random.randn(10, 2),
-   columns=['lat', 'lon']
-)
-
-df2 = pd.DataFrame(
-   np.random.randn(10, 2),
-)
-
-coordonates = pd.DataFrame(data = {
-    'latitude': [37.7749, 34.0522],
-    'longitude': [-122.4194, -118.2437],
-    'location': ['San Francisco', 'Los Angeles']
-})
-
-chart = alt.Chart(df).mark_circle().encode(
-    x='lat', y='lon', color='lon', tooltip=['lat', 'lon']
-)
-
-fig, ax = plt.subplots()
-ax.plot(df['lat'], df['lon'])
-
-spec = {
-    "mark": "bar",
-    "encoding": {
-        "x": {"field": "a", "type": "ordinal"},
-        "y": {"field": "b", "type": "quantitative"}
+def initialize_display_data():
+    """Initialize sample data and charts for display examples"""
+    # Sample DataFrame
+    df = pd.DataFrame({
+        'lat': np.random.randn(100) * 0.5 + 37.76,
+        'lon': np.random.randn(100) * 0.5 + -122.4
+    })
+    
+    # Sample charts
+    try:
+        # Altair chart
+        chart = alt.Chart(df).mark_circle().encode(
+            x='lat',
+            y='lon',
+            size='value:Q',
+            color='value:Q',
+            tooltip=['lat', 'lon']
+        ).properties(width=400, height=300)
+    except Exception as e:
+        st.error(f"Error creating Altair chart: {e}")
+        chart = None
+    
+    try:
+        # Matplotlib chart
+        fig, ax = plt.subplots()
+        ax.plot([1, 2, 3, 4])
+        plt.close(fig)
+    except Exception as e:
+        st.error(f"Error creating Matplotlib chart: {e}")
+        fig = None
+    
+    return {
+        'df': df,
+        'chart': chart,
+        'fig': fig
     }
-}
-
-image_file_path = 'img/streamlit-logo-primary-colormark-darktext.png'
-audio_file_path = 'audio/meeting-clip1.mp3'
-video_file_path = 'video/SampleVideo_1280x720_1mb.mp4'
-logo_file_path = "img/logo-Cyy6uKYt.png"
 
 def my_generator():
     i = 0
     while i < 5:
         i += 1  
         yield f'Data point {i}: {random.randint(1, 100),}'
-    
 
-# Define a stream for a language learning model
-# This is a simplified example, in a real-world scenario, you would use a proper LLM
 def my_llm_stream(prompt):
     for word in prompt.split():
         yield word
 
-with open('data/display.yaml', 'r') as file:
-    elements = yaml.safe_load(file)
-
-for element in elements:
-    if element['label'] == 'DataFrame Function':
-        element['data'] = df
-    elif element['label'] == 'Altair Chart':
-        element['data'] = chart
-    elif element['label'] == 'Matplotlib Figure':
-        element['data'] = fig
-    elif element['label'] == 'Vega-Lite Chart':
-        element['data'] = spec
-
 def display_page():
-    st.title("Streamlit Display Function Guide")
-    st.markdown("This page demonstrates various Streamlit display functions. Each function is explained and has a code snippet that you can use in your own apps.")
+    st.set_page_config(layout="wide")
+    
+    # Page header
+    st.title("📊 Display Elements")
+    st.markdown("""
+        Learn how to display various types of content in your Streamlit app.
+        Each example shows both the code and its output.
+    """)
+    
+    # Initialize display data
+    display_data = initialize_display_data()
+    
+    # Load display elements from YAML
+    try:
+        with open('data/display.yaml', 'r') as file:
+            display_elements = yaml.safe_load(file)
+    except Exception as e:
+        st.error(f"Error loading display elements: {e}")
+        display_elements = []
+    
+    # Display tutorial content
+    full_display(display_elements, display_data)
+    
+    # Interactive exercise section
+    st.markdown("---")
+    st.header("🎯 Practice Exercise")
+    st.markdown("""
+        Try creating a simple dashboard that combines different display elements:
+        1. Create a DataFrame with some sample data
+        2. Display it using `st.dataframe()`
+        3. Create a chart using any of the charting libraries
+        4. Add some text elements using markdown
+        5. Organize everything using columns and containers
+    """)
+    
+    # Add a code editor for practice
+    if st.toggle("Show code editor"):
+        st.code("""
+# Your code here
+import streamlit as st
+import pandas as pd
+import numpy as np
 
-    category = st.selectbox("Filter by Category", ["All", "Text", "Data", "Media", "Charts", "Layout"])
+# Create sample data
+df = pd.DataFrame({
+    'A': np.random.randn(5),
+    'B': np.random.randn(5)
+})
 
-    global_vars = {
-        "df": df,
-        "df2": df2,
-        "coordonates": coordonates,
-        "chart": chart,
-        "fig": fig,
-        "spec": spec,
-        "image_file_path": image_file_path,
-        "audio_file_path": audio_file_path,
-        "video_file_path": video_file_path,
-        "logo_file_path": logo_file_path,
-        "my_generator": my_generator,
-        "my_llm_stream": my_llm_stream,
-        "st": st,
-        "plt": plt,
-        "alt": alt,
-    }
+# Display the data
+st.dataframe(df)
 
-    if category == "All":
-        full_display(elements, global_vars)
-    else:
-        filtered_elements = [e for e in elements if e['category'] == category]
-        full_display(filtered_elements, global_vars) 
+# Create a chart
+st.line_chart(df)
+
+# Add some text
+st.markdown("## My Dashboard")
+st.write("This is a sample dashboard!")
+        """, language='python')
 
 if __name__ == "__main__":
     display_page()

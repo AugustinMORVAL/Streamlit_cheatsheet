@@ -1,26 +1,57 @@
 import streamlit as st
 from pages_registry import get_pages
+import streamlit.components.v1 as components
 
 st.set_page_config(
-    page_title="Streamlit Cheatsheet",
+    page_title="Streamlit CheatSheet",
     page_icon="📚",
+    layout="wide",
+    initial_sidebar_state="expanded"
 )
+
+# Custom CSS for better styling
+st.markdown("""
+    <style>
+    .main {
+        padding: 2rem;
+    }
+    .stButton>button {
+        width: 100%;
+        margin: 0.2rem 0;
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+    }
+    .sidebar .sidebar-content {
+        background-color: #f0f2f6;
+        padding: 1rem;
+    }
+    </style>
+""", unsafe_allow_html=True)
 
 if 'page' not in st.session_state:
     st.session_state['page'] = 'Home'
 
-pages = get_pages()
+# Sidebar
+with st.sidebar:
+    st.title("📚 Streamlit CheatSheet")
+    st.markdown("---")
+    
+    # Navigation buttons
+    pages = get_pages()
+    for page_name in pages.keys():
+        if st.button(page_name, key=f"nav_{page_name}"):
+            st.session_state['page'] = page_name
+    
+    st.markdown("---")
+    st.markdown("### Resources")
+    st.markdown("""
+    - [Streamlit Docs](https://docs.streamlit.io)
+    - [GitHub Repository](https://github.com/streamlit/streamlit)
+    - [Community Forum](https://discuss.streamlit.io)
+    """)
 
-# Remplacer le selectbox par des boutons
-for page_name in pages.keys():
-    if st.sidebar.button(page_name):
-        st.session_state['page'] = page_name
+# Main content
+## TO DO : think about main content if needed
 
+# Display the selected page
 pages[st.session_state['page']]()
-
-# Footer
-st.markdown("""
-<div style="text-align: center;">
-© 2024 Morval Tech. All rights reserved.
-</div>
-""", unsafe_allow_html=True)

@@ -1,52 +1,93 @@
-- label: Display text
+- label: Text Display
   code_snippet: st.write('Most objects') # df, err, func, keras!
   explanation: This code displays text using Streamlit's write function.
   category: Text
 
-- label: Display list 
+- label: List Display 
   code_snippet: st.write(['st', 'is <', 3]) # see *
   explanation: This code displays a list using Streamlit's write function.
   category: Text
 
-- label: Display JSON
+- label: Markdown Display
+  code_snippet: st.markdown("# This is a markdown header")
+  explanation: This code renders markdown text with formatting.
+  category: Text
+
+- label: Caption Display
+  code_snippet: st.caption("This is a caption")
+  explanation: This code displays a small caption text.
+  category: Text
+
+- label: Code Display
+  code_snippet: st.code("def hello():\n    print('Hello, World!')")
+  explanation: This code displays a code block with syntax highlighting.
+  category: Text
+
+- label: LaTeX Display
+  code_snippet: st.latex(r"\frac{a}{b} = \frac{c}{d}")
+  explanation: This code renders LaTeX equations.
+  category: Text
+
+- label: JSON Display
   code_snippet: st.json({'foo':'bar','fu':'ba'})
   explanation: This code displays JSON data using Streamlit's json function.
   category: Data
 
-- label: Display DataFrame
+- label: DataFrame Display
   code_snippet: st.dataframe(df)
-  explanation: This code displays a DataFrame using Streamlit's dataframe function.
+  explanation: This code displays an interactive DataFrame with sorting and filtering capabilities.
   category: Data
 
-- label: Display Table
+- label: DataFrame with Styling
+  code_snippet: st.dataframe(df.style.highlight_max(axis=0))
+  explanation: This code displays a DataFrame with custom styling and highlighting.
+  category: Data
+
+- label: DataFrame with Column Config
+  code_snippet: |
+    st.dataframe(
+        df,
+        column_config={
+            "Name": st.column_config.TextColumn("Full Name"),
+            "Age": st.column_config.NumberColumn("Age", format="%d years"),
+            "City": st.column_config.SelectboxColumn(
+                "City",
+                options=["New York", "Paris", "London", "Tokyo"]
+            )
+        }
+    )
+  explanation: This code displays a DataFrame with custom column configurations.
+  category: Data
+
+- label: Static Table
   code_snippet: st.table(df)
   explanation: This code displays a static table using Streamlit's table function.
   category: Data
 
-- label: Display Metric
-  code_snippet: st.metric(label="Temp", value="273 K", delta="1.2 K")
-  explanation: This code displays a metric with a label, value, and delta using Streamlit's metric function.
+- label: Data Editor
+  code_snippet: st.data_editor(df, num_rows="dynamic")
+  explanation: This code displays an editable data table with dynamic row loading.
   category: Data
 
-- label: Display Image
+- label: Metric Display
+  code_snippet: st.metric(label="Temp", value="273 K", delta="1.2 K")
+  explanation: This code displays a metric with a label, value, and delta.
+  category: Data
+
+- label: Image Display
   code_snippet: st.image("https://streamlit.io/images/brand/streamlit-logo-secondary-colormark-darktext.png")
   explanation: This code displays an image using Streamlit's image function.
   category: Media
 
-- label: Display Audio
+- label: Audio Display
   code_snippet: st.audio("https://upload.wikimedia.org/wikipedia/commons/c/c4/Muriel-Nguyen-Xuan-Chopin-valse-opus64-1.ogg")
   explanation: This code displays an audio player using Streamlit's audio function.
   category: Media
 
-- label: Display Video
+- label: Video Display
   code_snippet: st.video("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
   explanation: This code displays a video player using Streamlit's video function.
   category: Media
-
-- label: DataFrame Function
-  code_snippet: st.dataframe(df)
-  explanation: This code displays a DataFrame using Streamlit's dataframe function.
-  category: Data
 
 - label: Altair Chart
   code_snippet: st.altair_chart(chart)
@@ -68,15 +109,23 @@
   explanation: This code displays a bar chart using Streamlit's bar_chart function.
   category: Charts
 
+- label: Plotly Chart
+  code_snippet: |
+    import plotly.express as px
+    fig = px.scatter(df, x='lat', y='lon', color='lon')
+    st.plotly_chart(fig)
+  explanation: This code displays an interactive Plotly chart using the DataFrame's lat and lon columns.
+  category: Charts
+
 - label: Pyplot Chart
   code_snippet: |
     fig, ax = plt.subplots()
     ax.plot([1, 2, 3, 4])
     st.pyplot(fig)
-  explanation: This code displays a Matplotlib pyplot chart using Streamlit's pyplot function.
+  explanation: This code displays a Matplotlib pyplot chart.
   category: Charts
 
-- label: Two equal columns
+- label: Two Equal Columns
   code_snippet: |
     col1, col2 = st.columns(2)
     col1.write('This is column 1')
@@ -84,7 +133,7 @@
   explanation: This code creates two equal columns in Streamlit.
   category: Layout
 
-- label: Three different columns
+- label: Three Different Columns
   code_snippet: |
     col3, col4, col5 = st.columns([3, 1, 1])
     col3.write('This is column 1')
@@ -107,7 +156,7 @@
   explanation: This code creates a container for organizing elements.
   category: Layout
 
-- label: Empty
+- label: Empty Placeholder
   code_snippet: |
     placeholder = st.empty()
     placeholder.text("This text can be dynamically updated")
@@ -120,7 +169,6 @@
       st.write("This is in the sidebar")
   explanation: This code adds elements to the sidebar.
   category: Layout
-  mode: code
 
 - label: Tabs
   code_snippet: |
@@ -131,26 +179,6 @@
       st.write("This is tab 2")
   explanation: This code creates tabs for organizing content.
   category: Layout
-
-- label: Markdown
-  code_snippet: st.markdown("# This is a markdown header")
-  explanation: This code renders markdown text.
-  category: Text
-
-- label: Caption
-  code_snippet: st.caption("This is a caption")
-  explanation: This code displays a small caption text.
-  category: Text
-
-- label: Code
-  code_snippet: st.code("def hello():\n    print('Hello, World!')")
-  explanation: This code displays a code block with syntax highlighting.
-  category: Text
-
-- label: Latex
-  code_snippet: st.latex(r"\frac{a}{b} = \frac{c}{d}")
-  explanation: This code renders LaTeX equations.
-  category: Text
 
 - label: Divider
   code_snippet: st.divider()

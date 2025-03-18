@@ -1,37 +1,106 @@
 import streamlit as st
-from pages_registry import get_pages
+import streamlit.components.v1 as components
 
 def main_page():
-    st.title("Welcome to Streamlit Cheatsheet")
+    st.title("Welcome to Streamlit CheatSheet")
+        
+    # Introduction
     st.markdown("""
-    Streamlit is an open-source Python library that makes it easy to create and share beautiful, custom web apps for machine learning and data science. It's particularly well-suited for ML engineering and data science as it allows you to turn data scripts into shareable web apps in minutes.
-
-    Streamlit is useful for several reasons:
-    - **Ease of Use**: Streamlit allows you to turn your data scripts into a shareable web app with minimal effort.
-    - **Interactive Data Visualization**: Streamlit supports a wide variety of interactive charts and plots.
-    - **Real-Time Data**: Streamlit allows you to create real-time data apps.
-    - **Deployment**: Streamlit apps can be easily deployed on a variety of platforms.
-    - **Community and Resources**: Streamlit has a large and active community.
-    - **Integration with Machine Learning Libraries**: Streamlit integrates seamlessly with popular machine learning libraries.
+    ## 🚀 What is Streamlit?
+    
+    Streamlit is an open-source Python library that makes it easy to create and share beautiful, custom web apps for machine learning and data science. In just a few minutes you can build and deploy powerful data apps.
+    
+    ### Key Features:
+    - 🎨 Beautiful, interactive UI components
+    - 📊 Built-in support for data visualization
+    - 🔄 Hot-reloading for instant updates
+    - 🎯 Easy deployment options
+    - 🛠️ Rich ecosystem of components
     """)
-
-    st.write("Explore a variety of tutorials to enhance your Streamlit skills.")
-
-    st.markdown("### What you can find here:")
-
-    col1, col2 = st.columns(2)
-
-    pages = get_pages()
-    for i, (page_name, page_function) in enumerate(pages.items()):
-        if page_name != "Home":
-            with col1 if i % 2 == 0 else col2:
-                st.subheader(page_name)
-                st.write(f"Learn about {page_name.lower()} in Streamlit.")
-                if st.button(f"Go to {page_name} Tutorial", disabled=True):
-                    st.switch_page(f"lessons/{page_name.replace(' ', '_')}.py")
-
-    # visual separation
-    st.markdown("---")
+    
+    # Quick Start
+    st.markdown("""
+    ## ⚡ Quick Start
+    
+    ```python
+    import streamlit as st
+    
+    st.title('Hello World!')
+    st.write('Welcome to my first Streamlit app!')
+    ```
+    """)
+    
+    # Learning Path
+    st.markdown("""
+    ## 📚 Learning Path
+    
+    Follow this structured path to master Streamlit:
+    
+    1. **Getting Started**
+       - Installation and setup
+       - Basic app structure
+    
+    2. **Core Concepts**
+       - Widgets and input elements
+       - Display elements
+       - Data visualization
+       - State management
+    
+    3. **Examples & Projects**
+       - ChatBot development
+       - Data analysis apps
+       - Machine learning demos
+    """)
+    
+    # Interactive Demo
+    st.markdown("""
+    ## 🎮 Interactive Demo
+    
+    Try this simple example to see Streamlit in action:
+    """)
+    
+    with st.expander("Click to see the demo"):
+        name = st.text_input("Enter your name")
+        if name:
+            st.write(f"Hello, {name}! 👋")
+            
+            age = st.slider("Select your age", 0, 100, 25)
+            st.write(f"You are {age} years old!")
+            
+            if st.button("Generate a random number"):
+                import random
+                st.write(f"Your random number is: {random.randint(1, 100)}")
+    
+    # Resources
+    st.markdown("""
+    ## 📖 Additional Resources
+    
+    - [Official Documentation](https://docs.streamlit.io)
+    - [Streamlit Gallery](https://streamlit.io/gallery)
+    - [Community Forum](https://discuss.streamlit.io)
+    - [GitHub Repository](https://github.com/streamlit/streamlit)
+    
+    ## 🎯 Next Steps
+    
+    1. Check out the **Installation** guide to set up your environment
+    2. Explore the **Widgets & Input** section to learn about interactive elements
+    3. Visit the **Examples** section to see real-world applications
+    """)
+    
+    # Feedback
+    st.markdown("""
+    ## 💡 Feedback
+    
+    Help us improve this tutorial by providing your feedback:
+    """)
+    
+    with st.form("feedback_form"):
+        rating = st.slider("Rate this tutorial", 1, 5, 3)
+        feedback = st.text_area("Share your thoughts")
+        submitted = st.form_submit_button("Submit Feedback")
+        
+        if submitted:
+            st.success("Thank you for your feedback! 🙏")
 
 if __name__ == "__main__":
     main_page()

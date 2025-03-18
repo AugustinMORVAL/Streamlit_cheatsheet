@@ -1,6 +1,7 @@
-streamlit
-pandas
+streamlit>=1.31.0
+pandas>=2.0.0
 pyyaml
 altair
 matplotlib
-numpy
+numpy>=1.24.0
+plotly>=5.18.0

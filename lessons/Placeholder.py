@@ -9,13 +9,11 @@ data = {
 }
 df = pd.DataFrame(data)
 
-path_to_logo = "img/logo-Cyy6uKYt.png"
+path_to_logo = "assets/img/logo-Cyy6uKYt.png"
 
-# Load placeholder elements from YAML file
 with open('data/placeholder.yaml', 'r') as file:
     placeholder_elements = yaml.safe_load(file)
 
-# Preprocess placeholder elements
 for element in placeholder_elements:
     if element['label'] == 'Placeholder DataFrame' or element['label'] == 'Placeholder Line Chart' or element['label'] == 'Placeholder Write':
         element['data'] = df
