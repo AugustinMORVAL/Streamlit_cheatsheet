@@ -101,6 +101,21 @@ def main_page():
         
         if submitted:
             st.success("Thank you for your feedback! 🙏")
-
+            
+    # Author info
+    st.markdown("""
+    ---
+    ### 👨‍💻 About the Author
+    
+    This Streamlit CheatSheet was created by [Augustin MORVAL](https://github.com/AugustinMORVAL), a self-taught developer and tech enthusiast. 
+    
+    [![GitHub](https://img.shields.io/badge/GitHub-AugustinMORVAL-blue?style=flat&logo=github)](https://github.com/AugustinMORVAL)
+    [![LinkedIn](https://img.shields.io/badge/LinkedIn-Augustin_MORVAL-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/augustin-morval)
+    
+    *Part of my [Streamlit_cheatsheet](https://github.com/AugustinMORVAL/Streamlit_cheatsheet) project - An interactive Streamlit tutorial built with Streamlit itself.*
+    
+    ---
+    """)
+    
 if __name__ == "__main__":
     main_page()
