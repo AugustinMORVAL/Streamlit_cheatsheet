@@ -1,10 +1,10 @@
 - label: Text Display
-  code_snippet: st.write('Most objects') # df, err, func, keras!
+  code_snippet: st.write('Most objects')
   explanation: This code displays text using Streamlit's write function.
   category: Text
 
 - label: List Display 
-  code_snippet: st.write(['st', 'is <', 3]) # see *
+  code_snippet: st.write(['st', 'is <', 3])
   explanation: This code displays a list using Streamlit's write function.
   category: Text
 
@@ -90,8 +90,19 @@
   category: Media
 
 - label: Altair Chart
-  code_snippet: st.altair_chart(chart)
-  explanation: This code displays an Altair chart using Streamlit's altair_chart function.
+  code_snippet: |
+    chart = alt.Chart(chart_data).mark_line().encode(
+        x='date:T',
+        y='value:Q',
+        color='category:N',
+        tooltip=['date', 'value', 'category']
+    ).interactive()
+    st.altair_chart(chart)
+  explanation: "This code creates an interactive line chart using Altair. It shows:
+    - Time series data with multiple categories
+    - Interactive tooltips
+    - Automatic legend
+    - Responsive width adjustment"
   category: Charts
 
 - label: Line Chart
@@ -167,8 +178,9 @@
   code_snippet: |
     with st.sidebar:
       st.write("This is in the sidebar")
-  explanation: This code adds elements to the sidebar.
+  explanation: This code adds elements to the sidebar. When executed, it will create content in the app's sidebar panel.
   category: Layout
+  display_only: true
 
 - label: Tabs
   code_snippet: |

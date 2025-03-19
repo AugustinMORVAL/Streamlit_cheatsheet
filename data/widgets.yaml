@@ -16,8 +16,9 @@
   alt: st.link_button("Go to gallery", url)
 
 - label: Page Link
-  code_snippet: st.page_link("Display.py", label="Go to Display Page")
-  explanation: A link to another page in your Streamlit app. The file must be in the 'lessons/' directory.
+  code_snippet: st.page_link("pages/Display.py", label="Go to Display Page")
+  explanation: A link to another page in your Streamlit app. The file must be in the 'pages/' directory.
+  code_display: true
 
 - label: Data Editor
   code_snippet: st.data_editor(data)

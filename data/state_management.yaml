@@ -5,7 +5,7 @@
   explanation: |
     Session state allows you to share variables between reruns, for each user session.
     Use it to store and persist data across reruns.
-  display_only: true
+  code_display: true
 
 - label: Accessing Session State
   code_snippet: |
@@ -24,7 +24,7 @@
   explanation: |
     You can access session state using dot notation or dictionary-style notation.
     Both methods work for reading and writing values.
-  display_only: true
+  code_display: true
 
 - label: Initializing Session State
   code_snippet: |
@@ -33,7 +33,7 @@
   explanation: |
     It's a good practice to check if a key exists in the session state before using it.
     This prevents errors and allows you to set default values.
-  display_only: true
+  code_display: true
 
 - label: Using Session State with Widgets
   code_snippet: |
@@ -87,4 +87,4 @@
     - Initialize all state variables at the start of your app.
     - Use session state judiciously to avoid cluttering.
     - Remember that session state is per-user, not global across all users.
-  display_only: true
+  code_display: true

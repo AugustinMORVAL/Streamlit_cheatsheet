@@ -1,50 +1,81 @@
-- label: Placeholder Text
-  code_snippet: st.empty().text('Hello, World!')
-  explanation: Displays text that can be updated later.
-  alt: placeholder.text('Hello, World!')
+- label: Empty Placeholder
+  code_snippet: |
+    placeholder = st.empty()
+    placeholder.text("This is a placeholder")
+  explanation: |
+    Creates an empty placeholder that can hold any Streamlit element and be updated later.
   category: Placeholder
 
 - label: Placeholder DataFrame
-  code_snippet: st.empty().dataframe(data)
-  explanation: Displays a DataFrame that can be updated later.
-  data: df
-  alt: placeholder.dataframe(df)
+  code_snippet: |
+    placeholder = st.empty()
+    placeholder.dataframe(df)
+  explanation: |
+    Displays a DataFrame that can be updated later using the same placeholder.
   category: Placeholder
 
 - label: Placeholder Line Chart
-  code_snippet: st.empty().line_chart(data)
-  explanation: Displays a line chart that can be updated later.
-  data: df
-  alt: placeholder.linechart(df)
+  code_snippet: |
+    placeholder = st.empty()
+    placeholder.line_chart(df)
+  explanation: |
+    Displays a line chart that can be updated later using the same placeholder.
   category: Placeholder
 
 - label: Placeholder Image
-  code_snippet: st.empty().image(data)
-  explanation: Displays an image that can be updated later.
-  data: path_to_logo
-  alt: placeholder.image(path_to_logo)
+  code_snippet: |
+    placeholder = st.empty()
+    placeholder.image(path_to_logo)
+  explanation: |
+    Displays an image that can be updated later using the same placeholder.
   category: Placeholder
 
-- label: Placeholder Markdown
-  code_snippet: st.empty().markdown('# Hello, *World!*')
-  explanation: Displays Markdown text that can be updated later.
-  alt: placeholder.markdown('# Hello, *World!*')
+- label: Placeholder Container
+  code_snippet: |
+    placeholder = st.empty()
+    with placeholder.container():
+        st.write("This is inside a container")
+        st.button("Click me")
+  explanation: |
+    Creates a container placeholder that can hold multiple Streamlit elements.
   category: Placeholder
 
-- label: Placeholder Write
-  code_snippet: st.empty().write(data)
-  explanation: Displays any type of data that can be updated later.
-  data: df
-  alt: placeholder.write(df)
+- label: Placeholder Form
+  code_snippet: |
+    placeholder = st.empty()
+    with placeholder.form("my_form"):
+        st.text_input("Enter text")
+        st.form_submit_button("Submit")
+  explanation: |
+    Creates a form placeholder that can be updated dynamically.
   category: Placeholder
 
-- label: Exception
-  code_snippet: st.exception(Exception("This is an exception"))
-  explanation: Displays an exception.
+- label: Placeholder Columns
+  code_snippet: |
+    placeholder = st.empty()
+    with placeholder.container():
+        col1, col2 = st.columns(2)
+        with col1:
+            st.write("Column 1")
+        with col2:
+            st.write("Column 2")
+  explanation: |
+    Creates a placeholder with columns layout that can be updated.
+  category: Placeholder
+
+- label: Help Tooltip
+  code_snippet: |
+    st.help(st.empty)
+  explanation: |
+    Displays help information about the empty placeholder function.
   category: Help
 
-- label: Help
-  code_snippet: st.help(pd.DataFrame)
-  explanation: Displays the docstring for the specified object.
-  category: Help
-
+- label: Clear Placeholder
+  code_snippet: |
+    placeholder = st.empty()
+    placeholder.text("This will be cleared")
+    if st.button("Clear"):
+        placeholder.empty()
+  explanation: |
+    Shows how to clear a placeholder's contents.
+  category: Placeholder
