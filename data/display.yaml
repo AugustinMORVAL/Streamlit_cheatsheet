@@ -180,7 +180,7 @@
       st.write("This is in the sidebar")
   explanation: This code adds elements to the sidebar. When executed, it will create content in the app's sidebar panel.
   category: Layout
-  display_only: true
+  code_display: true
 
 - label: Tabs
   code_snippet: |
