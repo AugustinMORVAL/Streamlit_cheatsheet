@@ -35,17 +35,17 @@ class TutorialDisplay:
                     search_query in e.get('explanation', '').lower()]
         return self.elements
 
-    def create_category_tabs(self, elements: List[Dict[str, Any]]) -> tuple:
-        """Create tabs for different categories"""
+    def create_category_pills(self, elements: List[Dict[str, Any]]) -> List[str]:
+        """Create pills for different categories"""
         categories = ["All"] + sorted(list(set(e.get('category', 'Uncategorized') for e in elements)))
-        return st.tabs(categories), categories
+        selected = st.pills("Categories", categories, selection_mode="multi")
+        return selected
 
-    def display_element(self, item: Dict[str, Any], index: int) -> None:
+    def display_element(self, item: Dict[str, Any], index: int, category: str) -> None:
         """Display a single element with improved UI"""
         element_label = item.get('label', 'Unnamed Example').lower().replace(' ', '_')
-        category = item.get('category', 'uncategorized').lower().replace(' ', '_')
         self.element_counter += 1
-        unique_key = f"toggle_{category}_{element_label}_{self.element_counter}"
+        unique_key = f"{category}_{element_label}_{self.element_counter}"
         
         if item.get('code_display', False):
             display_code(
@@ -92,11 +92,6 @@ class TutorialDisplay:
                             st.code(item['alt'], language='python')
                         else:
                             st.code(item['code_snippet'], language='python')
-                            
-    def display_elements(self, elements: List[Dict[str, Any]]) -> None:
-        """Display all elements in the tutorial"""
-        for i, element in enumerate(elements):
-            self.display_element(element, i)
 
     def display_practice_section(self, practice_content: Optional[Dict[str, Any]] = None) -> None:
         """Display a practice section with customizable content"""
@@ -126,39 +121,36 @@ class TutorialDisplay:
         # Search bar
         filtered_elements = self.create_search_bar()
         
-        # Categories tabs
+        # Categories pills
         categories = sorted(list(set(e.get('category', 'Uncategorized') for e in filtered_elements)))
         
         if len(categories) > 1:
-            tabs, categories = self.create_category_tabs(filtered_elements)
-            for tab, category in zip(tabs, categories):
-                with tab:
-                    if category == "All":
-                        elements_to_show = filtered_elements
-                    else:
-                        elements_to_show = [e for e in filtered_elements if e.get('category', 'Uncategorized') == category]
-                    
-                    if elements_to_show:
-                        st.markdown(f"""
-                            ### {category} Examples
-                            Explore different ways to {category.lower()} in your Streamlit app.
-                        """)
-                        
-                        if category == "All":
-                            unique_elements = []
-                            seen = set()
-                            for element in elements_to_show:
-                                element_id = (element.get('label', ''), element.get('code_snippet', ''))
-                                if element_id not in seen:
-                                    seen.add(element_id)
-                                    unique_elements.append(element)
-                            elements_to_show = unique_elements
-                        
-                        for i, element in enumerate(elements_to_show):
-                            self.display_element(element, i)
+            selected_categories = self.create_category_pills(filtered_elements)
+            
+            if not selected_categories:
+                elements_to_show = filtered_elements
+            else:
+                elements_to_show = []
+                for element in filtered_elements:
+                    element_category = element.get('category', 'Uncategorized')
+                    if element_category in selected_categories or "All" in selected_categories:
+                        elements_to_show.append(element)
+            
+            if elements_to_show:
+                unique_elements = []
+                seen = set()
+                for element in elements_to_show:
+                    element_id = (element.get('label', ''), element.get('code_snippet', ''))
+                    if element_id not in seen:
+                        seen.add(element_id)
+                        unique_elements.append(element)
+                
+                for i, element in enumerate(unique_elements):
+                    category_key = "_".join(selected_categories) if selected_categories else "All"
+                    self.display_element(element, i, category_key)
         else:
             for i, element in enumerate(filtered_elements):
-                self.display_element(element, i)
+                self.display_element(element, i, "All")
         
         if practice_content:
             self.display_practice_section(practice_content)
