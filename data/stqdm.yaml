@@ -1,0 +1,18 @@
+- label : Simple Use Case
+  code_snippet : |
+    if st.button("Run"):
+        for i in stqdm(range(100)):
+            time.sleep(0.01)
+  explanation : Display a simple progress bar.
+  category : Progress Bar
+        
+- label: Customize the bar with tqdm parameters
+  code_snippet: |
+    if st.button("Test"):  
+        for _ in stqdm(range(50), desc="This is a slow task", mininterval=0.5):
+            time.sleep(0.1)
+  explanation: |
+    - desc: Description of the task
+    - mininterval: Minimum interval between updates
+  category: Progress Bar
+        
