@@ -4,17 +4,18 @@ import yaml
 import numpy as np
 
 class TutorialDisplay:
-    def __init__(self, page_title: str, page_description: str):
+    def __init__(self, page_title: str, page_description: str, intro_section: dict = None):
         """Initialize the tutorial display with page-specific information"""
         self.page_title = page_title
         self.page_description = page_description
+        self.intro_section = intro_section
         self.elements = []
         self.global_vars = {}
         self.element_counter = 0
         
-    def load_yaml(self, yaml_path: str) -> None:
-        """Load tutorial elements from a YAML file"""
-        with open(yaml_path, 'r') as file:
+    def load_yaml(self, yaml_file: str) -> None:
+        """Load elements from a YAML file."""
+        with open(yaml_file, 'r', encoding='utf-8') as file:
             self.elements = yaml.safe_load(file)
         
     def add_element(self, element: Dict[str, Any]) -> None:
@@ -112,11 +113,42 @@ class TutorialDisplay:
                         if st.form_submit_button("Submit"):
                             practice_content.get('on_submit', lambda: None)()
 
-    def display(self, practice_content: Optional[Dict[str, Any]] = None) -> None:
+    def display(self, practice_content: Optional[Dict[str, Any]] = None, **kwargs) -> None:
         """Main display function that renders the entire tutorial"""
         # Page header
         st.title(self.page_title)
         st.markdown(self.page_description)
+        
+        # Introduction section
+        if self.intro_section:
+            st.write('---')
+            if 'title' in self.intro_section:
+                st.markdown(self.intro_section['title'])
+            if 'content' in self.intro_section:
+                st.markdown(self.intro_section['content'])
+            if 'code' in self.intro_section:
+                st.code(
+                    self.intro_section['code'],
+                    language=self.intro_section.get('language', 'python')
+                )
+            
+            keys = set(self.intro_section.keys())
+            additional_pairs = {k[:-8] for k in keys if k.endswith('_content')}
+            
+            for base in additional_pairs:
+                content_key = f"{base}_content"
+                code_key = f"{base}_code"
+                language_key = f"{base}_language"
+                
+                if content_key in self.intro_section:
+                    st.markdown(self.intro_section[content_key])
+                if code_key in self.intro_section:
+                    st.code(
+                        self.intro_section[code_key],
+                        language=self.intro_section.get(language_key, 'python')
+                    )
+            
+            st.write('---')
         
         # Search bar
         filtered_elements = self.create_search_bar()
