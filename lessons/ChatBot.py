@@ -1,6 +1,7 @@
 import streamlit as st
 import yaml
 from utils.tutorial_display import TutorialDisplay
+import time
 
 def chatbot_page():
     tutorial = TutorialDisplay(
@@ -15,7 +16,8 @@ def chatbot_page():
     
     global_vars = {
         "st": st,
-        "messages": st.session_state.messages
+        "messages": st.session_state.messages,
+        "time": time
     }
     tutorial.set_global_vars(global_vars)
     

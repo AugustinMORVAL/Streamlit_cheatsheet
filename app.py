@@ -35,9 +35,28 @@ with st.sidebar:
     st.title("📚 Streamlit CheatSheet")
     st.markdown("---")
     
-    # Navigation buttons
     pages = get_pages()
-    for page_name in pages.keys():
+    
+    for page_name in ["Home", "Installation"]:
+        if st.button(page_name, key=f"nav_{page_name}"):
+            st.session_state['page'] = page_name
+    
+    st.markdown("##### Core Features")
+    core_pages = ["Widgets & Input", "Display Elements", "Layout & Containers", 
+                 "State Management", "Status", "Placeholder & Help"]
+    for page_name in core_pages:
+        if st.button(page_name, key=f"nav_{page_name}"):
+            st.session_state['page'] = page_name
+    
+    st.markdown("##### Examples & Tutorials")
+    tutorial_pages = ["Build a ChatBot"]
+    for page_name in tutorial_pages:
+        if st.button(page_name, key=f"nav_{page_name}"):
+            st.session_state['page'] = page_name
+            
+    st.markdown("##### Extra")
+    extra_pages = ["Stqdm"]
+    for page_name in extra_pages:
         if st.button(page_name, key=f"nav_{page_name}"):
             st.session_state['page'] = page_name
     

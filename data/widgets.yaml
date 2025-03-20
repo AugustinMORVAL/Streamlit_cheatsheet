@@ -1,105 +1,151 @@
 - label: Classic Button
   code_snippet: st.button("Click me")
   explanation: A simple button that does nothing when clicked.
+  category: Buttons
 
 - label: Download Button
   code_snippet: st.download_button("Download file", "Hello")
   explanation: A button that allows users to download a file when clicked.
+  category: Buttons
 
 - label: Feedback
   code_snippet: st.feedback("thumbs")
   explanation: A feedback widget that allows users to provide thumbs up/down feedback.
+  category: Buttons
 
 - label: Link Button
   code_snippet: st.link_button("Go to gallery", "https://www.example.com")
   explanation: A button that links to a specified URL when clicked.
   alt: st.link_button("Go to gallery", url)
+  category: Buttons
 
 - label: Page Link
   code_snippet: st.page_link("pages/Display.py", label="Go to Display Page")
   explanation: A link to another page in your Streamlit app. The file must be in the 'pages/' directory.
   code_display: true
+  category: Navigation
 
 - label: Data Editor
   code_snippet: st.data_editor(data)
   explanation: A data editor that allows users to edit data in a table format.
+  category: Data
 
 - label: Checkbox
   code_snippet: st.checkbox("I agree")
   explanation: A checkbox that allows users to select or deselect an option.
+  category: Selection
 
 - label: Toggle
   code_snippet: st.toggle("Enable")
   explanation: A toggle switch that allows users to switch between two states.
+  category: Selection
 
 - label: Radio
   code_snippet: st.radio("Pick one", ["cats", "dogs"])
   explanation: A radio button group that allows users to select one option from a list.
+  category: Selection
 
 - label: Select Box
   code_snippet: st.selectbox("Pick one", ["cats", "dogs"])
   explanation: A select box that allows users to select one option from a dropdown list.
+  category: Selection
 
 - label: Multiselect Box
-  code_snippet: st.multiselect("Buy", ["milk", "apples", "potatoes"])
+  code_snippet: |
+    st.multiselect(
+      "What are your favorite colors",
+      ["Green", "Yellow", "Red", "Blue"],
+      ["Yellow", "Red"],
+    )
   explanation: A select box that allows users to select multiple options from a list.
+  category: Selection
+
+- label: Tags
+  code_snippet: |
+    options = ["North", "South", "East", "West"]
+    st.pills("Directions", options, selection_mode="multi")
+  explanation: A tag input that allows users to select multiple options from a list.
+  category: Selection
+
+- label: Filter
+  code_snippet: |
+    options = ["North", "East", "South", "West"]
+    st.segmented_control("Directions", options, selection_mode="multi")
+  explanation: A multi-select filter that allows users to select multiple options from a list.
+  category: Selection
 
 - label: Slider
   code_snippet: st.slider("Pick a number", 0, 100)
   explanation: A slider that allows users to select a value within a specified range.
+  category: Numeric
 
 - label: Slider with Default Value
   code_snippet: st.slider("Pick a number", 0, 100, value=50)
   explanation: A slider with a default value.
+  category: Numeric
 
 - label: Slider with Steps
   code_snippet: st.slider("Pick a number", 0, 100, step=5)
   explanation: A slider with a specified step size.
+  category: Numeric
 
 - label: Slider with Format
   code_snippet: st.slider("Pick a number", 0, 100, format="%d%%")
   explanation: A slider with a specified format for the displayed value.
+  category: Numeric
 
 - label: Select Slider
   code_snippet: st.select_slider("Pick a size", ["S", "M", "L"])
   explanation: A select slider that allows users to select a value from a list of options.
+  category: Numeric
 
 - label: Text Input Field
   code_snippet: st.text_input("First name")
   explanation: A text input field that allows users to enter text.
+  category: Text
 
 - label: Number Input
   code_snippet: st.number_input("Num:")
   explanation: A number input field that returns a value that can be used in your code.
+  category: Numeric
 
 - label: Number Input with Range
   code_snippet: st.number_input("Pick a number", 0, 10)
   explanation: A number input field that allows users to enter a number within a specified range.
+  category: Numeric
 
 - label: Text Area
   code_snippet: st.text_area("Text to translate")
   explanation: A text area that allows users to enter multiple lines of text.
+  category: Text
 
 - label: Date Input
   code_snippet: st.date_input("Your birthday")
   explanation: A date input field that allows users to select a date.
+  category: Date & Time
 
 - label: Time Input
   code_snippet: st.time_input("Meeting time")
   explanation: A time input field that allows users to select a time.
+  category: Date & Time
 
 - label: File Uploader
   code_snippet: st.file_uploader("Upload a CSV")
   explanation: A file uploader that allows users to upload a file.
+  category: Media & Files
 
 - label: Camera Input
   code_snippet: st.camera_input("Take a picture")
   explanation: A camera input that allows users to take a picture using their webcam.
+  category: Media & Files
 
 - label: Color Picker
   code_snippet: st.color_picker("Pick a color")
   explanation: A color picker that allows users to select a color.
+  category: Media & Files
 
 - label: Disabled Widget
   code_snippet: st.slider("Pick a number", 0, 100, disabled=True, key="disabled_slider")
   explanation: Disable widgets to remove interactivity
+  category: Disabled
+

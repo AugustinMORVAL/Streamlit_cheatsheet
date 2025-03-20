@@ -1,0 +1,89 @@
+- label: Progress Bar
+  code_snippet: |
+    if st.button("Launch rocket"):
+        progress_bar = st.progress(0)
+        for i in range(0, 101, 10):
+            progress_bar.progress(i)
+            time.sleep(0.1)
+  explanation: Displays a progress bar that updates in place. By creating the progress bar once and updating its value, we get smoother animations and better performance.
+  category: Status
+
+- label: Spinner
+  code_snippet: |
+    if st.button("Spin"):
+      with st.spinner("Spinning..."):
+        time.sleep(2)
+        st.write("Spinning complete!")
+  explanation: Displays a spinner.
+  category: Status
+
+- label: Status Container
+  code_snippet: |
+    if st.button("Download data"):
+        with st.status("Downloading data..."):
+            st.write("Searching for data...")
+            time.sleep(1)
+            st.write("Found URL.")
+            time.sleep(1)
+            st.write("Downloading data...")
+            time.sleep(1)
+  explanation: Displays a status message in a container.
+  category: Status
+
+- label: Toast
+  code_snippet: |
+    if st.button('Three cheers'):
+      st.toast('Hip!')
+      time.sleep(.5)
+      st.toast('Hip!')
+      time.sleep(.5)
+      st.toast('Hooray!', icon='🎉')
+  explanation: Display a short message, known as a notification "toast".
+  category: Status
+
+- label: Success box
+  code_snippet: |
+    st.success("Success! The action was successful.")
+  explanation: Display a success message.
+  category: Callout
+
+- label: Info box
+  code_snippet: |
+    st.info("Info! This is an info message.")
+  explanation: Display an info message.
+  category: Callout
+
+- label: Warning box
+  code_snippet: |
+    st.warning("Warning! This is a warning message.")
+  explanation: Display a warning message.
+  category: Callout
+
+- label: Error box
+  code_snippet: |
+    st.error("Error! This is an error message.")
+  explanation: Display an error message.
+  category: Callout
+
+- label: Exception box
+  code_snippet: |
+    st.exception(Exception("This is an exception message."))
+  explanation: Display an exception message.
+  category: Callout
+
+- label: Balloons
+  code_snippet: |
+    if st.button("Show balloons"):
+      st.balloons()
+  explanation: Display balloons.
+  category: Animation
+
+- label: Snowflakes
+  code_snippet: |
+    if st.button("Show snowflakes"):
+      st.snow()
+  explanation: Display snowflakes.
+  category: Animation
+
+
+

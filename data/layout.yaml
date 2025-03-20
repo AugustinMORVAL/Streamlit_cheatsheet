@@ -1,0 +1,98 @@
+- label: Two Equal Columns
+  code_snippet: |
+    col1, col2 = st.columns(2)
+    col1.write('This is column 1')
+    col2.write('This is column 2')
+  explanation: This code creates two equal columns in Streamlit.
+  category: Layout
+
+- label: Three Different Columns
+  code_snippet: |
+    col3, col4, col5 = st.columns([3, 1, 1])
+    col3.write('This is column 1')
+    col4.write('This is column 2')
+    col5.write('This is column 3')
+  explanation: This code creates three different columns in Streamlit.
+  category: Layout
+
+- label: Container
+  code_snippet: |
+    with st.container():
+      st.write("This is inside a container")
+  explanation: This code creates a container for organizing elements.
+  category: Container
+
+- label: Empty Container
+  code_snippet: |
+    with st.empty():
+      if st.button("Start"):
+        for seconds in range(3):
+          st.write(f"⏳ {seconds} seconds have passed")
+          time.sleep(1)
+        st.write(":material/check: 3 seconds over!")
+  explanation: This code creates an empty placeholder that can be updated later.
+  category: Container
+
+- label: Expander
+  code_snippet: |
+    with st.expander("See explanation"):
+      st.write("This content is hidden in an expander.")
+  explanation: This code creates an expander that can show/hide content.
+  category: Layout
+
+- label: Popover
+  code_snippet: |
+    with st.popover("Open popover"):
+      st.markdown("Hello World 👋")
+      name = st.text_input("What's your name?")
+      
+    st.write("Your name:", name)
+  explanation: This code creates a popover that can show/hide content.
+  category: Container
+
+- label: Modal dialog
+  code_snippet: |
+    @st.dialog("Cast your vote")
+    def vote(item):
+        st.write(f"Why is {item} your favorite?")
+        reason = st.text_input("Because...")
+        if st.button("Submit"):
+            st.session_state.vote = {"item": item, "reason": reason}
+            st.rerun()
+
+    if "vote" not in st.session_state:
+        st.write("Vote for your favorite")
+        if st.button("A"):
+            vote("A")
+        if st.button("B"):
+            vote("B")
+    else:
+        st.write(f"You voted for {st.session_state.vote['item']} because {st.session_state.vote['reason']}")
+        if st.button("Vote Again"):
+            del st.session_state.vote
+            st.rerun()
+  explanation: A function decorated with @st.dialog becomes a dialog function. When you call a dialog function, Streamlit inserts a modal dialog into your app. Streamlit element commands called within the dialog function render inside the modal dialog.
+  category: Container
+
+- label: Sidebar
+  code_snippet: |
+    with st.sidebar:
+      st.write("This is in the sidebar")
+  explanation: This code adds elements to the sidebar. When executed, it will create content in the app's sidebar panel.
+  category: Layout
+  code_display: true
+
+- label: Tabs
+  code_snippet: |
+    tab1, tab2 = st.tabs(["Tab 1", "Tab 2"])
+    with tab1:
+      st.write("This is tab 1")
+    with tab2:
+      st.write("This is tab 2")
+  explanation: This code creates tabs for organizing content.
+  category: Layout
+
+- label: Divider
+  code_snippet: st.divider()
+  explanation: This code adds a horizontal line to separate content.
+  category: Layout
