@@ -53,12 +53,6 @@ with st.sidebar:
     for page_name in tutorial_pages:
         if st.button(page_name, key=f"nav_{page_name}"):
             st.session_state['page'] = page_name
-            
-    st.markdown("##### Extra")
-    extra_pages = ["Stqdm"]
-    for page_name in extra_pages:
-        if st.button(page_name, key=f"nav_{page_name}"):
-            st.session_state['page'] = page_name
     
     st.markdown("---")
     st.markdown("### Resources")
