@@ -26,7 +26,4 @@ def get_pages():
         
         # Examples & Tutorials
         "Build a ChatBot": chatbot_page,
-        
-        # Extra
-        "Stqdm": stqdm_page,
     }
