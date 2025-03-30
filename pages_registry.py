@@ -8,7 +8,6 @@ def get_pages():
     from lessons.StateManagement import state_management_page
     from lessons.Layout import layout_page
     from lessons.Status import status_page
-    from lessons.Stqdm import stqdm_page
 
 
     return {
